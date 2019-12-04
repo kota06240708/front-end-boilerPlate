@@ -1,4 +1,4 @@
-import conf from './config'
+import conf from './system/config'
 
 import autoPrefixer from 'autoprefixer'
 import mqpacker from 'css-mqpacker'
