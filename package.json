@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_ENV=local babel-node system/index.js --location=local",
+    "test:prod": "NODE_ENV=development babel-node system/index.js --location=local"
   },
   "repository": {
     "type": "git",
@@ -17,15 +18,35 @@
   },
   "homepage": "https://github.com/kota06240708/front-end-boilerPlate#readme",
   "devDependencies": {
+    "@babel/core": "^7.7.4",
+    "@babel/node": "^7.7.4",
+    "@babel/plugin-transform-runtime": "^7.7.4",
     "@babel/preset-env": "^7.7.4",
     "@babel/preset-es2015": "^7.0.0-beta.53",
     "@babel/register": "^7.7.4",
     "@babel/runtime": "^7.7.4",
+    "autoprefixer": "^9.7.3",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "chalk": "^3.0.0",
     "chokidar": "^3.3.0",
-    "node-sass": "^4.13.0"
+    "css-mqpacker": "^7.0.0",
+    "cssnano": "^4.1.10",
+    "glob": "^7.1.6",
+    "minimist": "^1.2.0",
+    "mkdirp": "^0.5.1",
+    "node-sass": "^4.13.0",
+    "postcss": "^7.0.23",
+    "postcss-calc": "^7.0.1",
+    "postcss-cli": "^6.1.3",
+    "postcss-easings": "^2.0.0",
+    "postcss-easy-import": "^3.0.0",
+    "postcss-flexbugs-fixes": "^4.1.0",
+    "postcss-nested": "^4.2.1",
+    "postcss-reporter": "^6.0.1"
+  },
+  "dependencies": {
+    "moment": "^2.24.0"
   }
 }
