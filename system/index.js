@@ -8,7 +8,7 @@ import moment from 'moment'
 import sass from 'node-sass'
 import postcss from 'postcss'
 
-import conf from '../config'
+import conf from './config'
 import writeFile from './config/util/writefile'
 import postcssConf from '../postcss.config'
 
@@ -103,8 +103,6 @@ fs.access(distPath, error => {
       console.error(chalk.red(error.message))
       return
     }
-
-    const ignoreRegExp = new RegExp(`^${['_', 'ignore'].join('|^')}`)
 
     dirs.forEach(entry => {
       const entryDir = entry.replace(new RegExp('src/'), '') // srcを削除したパス
