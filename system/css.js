@@ -72,6 +72,8 @@ const onRender = (entry, out) => {
         // sass -> css
         await writeFile(out, getsSassRender)
 
+        console.log(out)
+
         const config = postcssConf(out, out)
 
         // 吐き出されたcssをpostcssに通す
