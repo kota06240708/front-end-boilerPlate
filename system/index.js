@@ -1,6 +1,7 @@
 import css from './css'
 import html from './html'
-  ;(async () => {
+import js from './js'
+;(async () => {
   await css()
   await html()
 })()
