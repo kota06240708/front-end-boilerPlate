@@ -9,7 +9,7 @@ const onInitRender = () => {
       if (err) {
         throw new Error('webpack build failed')
       }
-      const text = stats.toString({
+      const log = stats.toString({
         colors: true,
         version: false,
         hash: false,
@@ -18,7 +18,7 @@ const onInitRender = () => {
         chunkModules: false
       })
 
-      chalk.green(`✔︎ Compiled Script ${text}`)
+      chalk.green(`✔︎ Compiled Script ${log}`)
     })
 
     resolve()
