@@ -72,8 +72,6 @@ const onRender = (entry, out) => {
         // sass -> css
         await writeFile(out, getsSassRender)
 
-        console.log(out)
-
         const config = postcssConf(out, out)
 
         // 吐き出されたcssをpostcssに通す
@@ -129,7 +127,7 @@ const onInitRender = () => {
                     ;(async () => {
                       const compileStartTime = moment()
 
-                      await onRender(entry, distFile) // cssレンダリン
+                      await onRender(entry, distFile) // cssレンダリング
 
                       const diff = moment().diff(compileStartTime) // レンダリングの時間を取得
 

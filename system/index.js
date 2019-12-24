@@ -1,7 +1,9 @@
 import css from './css'
 import html from './html'
-import js from './js'
+import browser from './browser'
+import checkDist from './config/util/check-dist'
 ;(async () => {
-  await css()
-  await html()
+  await checkDist()
+  await Promise.all([html(), css()])
+  await browser()
 })()
