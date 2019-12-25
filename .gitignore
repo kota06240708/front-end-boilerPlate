@@ -104,3 +104,7 @@ production-htdocs
 .idea/
 
 *.map
+
+dist/
+development/
+production/

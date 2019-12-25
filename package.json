@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=local nodemon --exec babel-node system/server.js --location=local",
-    "test:prod": "NODE_ENV=development nodemon --exec babel-node system/index.js --location=local",
-    "cpx:dev": "cpx \"src/**/**/*.{js,gif,png,jpg,ico,svg,mp3,mp4,webm,eot,ttf,otf,woff,woff2,xml,json,txt,webmanifest,htaccess}\" dist"
+    "start": "NODE_ENV=local nodemon --exec babel-node system/server.js --location=local",
+    "build": "NODE_ENV=production babel-node system/build.js --location=local && yarn cpx:prod",
+    "cpx:prod": "cpx \"src/**/**/*.{js,gif,png,jpg,ico,svg,mp3,mp4,webm,eot,ttf,otf,woff,woff2,xml,json,txt,webmanifest,htaccess}\" production"
   },
   "repository": {
     "type": "git",
