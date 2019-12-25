@@ -110,8 +110,6 @@ const onInitRender = () => {
           const entryDir = entry.replace(new RegExp('src/'), '') // srcを削除したパス
           const distFile = `${path.join(distPath, entryDir)}/index.css` // 吐き出すパス
 
-          console.log(entry)
-
           onRender(entry, distFile)
             .then(() => {
               console.log(chalk.green(`✔︎ build Style ${distFile}`))

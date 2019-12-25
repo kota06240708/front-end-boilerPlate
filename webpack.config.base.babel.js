@@ -5,16 +5,11 @@ const entries = []
 
 const { src, jsDir } = conf()
 
-console.log(`./${src}/**/${jsDir}`)
-
 glob
   .sync(`./${src}/**/${jsDir}`, {
     ignore: `./${src}/**/_${jsDir}`
   })
-  .map(file => {
-    console.log(file)
-    return entries.push(file)
-  })
+  .map(file => entries.push(file))
 
 export default {
   entry: entries,
