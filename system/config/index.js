@@ -15,9 +15,7 @@ const conf = () => {
   result.distPath = path.join(process.cwd(), result.dist)
   result.prodPath = path.join(process.cwd(), result.env)
 
-  result.htmlPath = '.pug'
-  result.cssPath = '.scss'
-  result.cssDir = 'style'
+  result.cssDir = '*.scss'
   result.htmlDir = '*.pug'
   result.jsDir = '*.js'
 

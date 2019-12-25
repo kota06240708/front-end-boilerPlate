@@ -33,6 +33,7 @@ const onRender = (entry, out) => {
           return
         }
 
+        console.log(chalk.green(`✔︎ build html ${distPath}`))
         writeFile(distFile, data)
       }
     )
@@ -41,12 +42,10 @@ const onRender = (entry, out) => {
 
 const onInitRender = () => {
   return new Promise(resolve => {
-    fs.access(distPath, error => {
-      if (error) {
-        fs.mkdirSync(distPath) // ない場合フォルダーを作成
-      }
-
-      glob(`${src}/**/${htmlDir}`, {}, (error, dirs) => {
+    glob(
+      `${src}/**/${htmlDir}`,
+      { ignore: `${src}/**/_${htmlDir}` },
+      (error, dirs) => {
         dirs.forEach(r => {
           const result = r.split('/')
           result.pop()
@@ -84,10 +83,10 @@ const onInitRender = () => {
               })
           }
         })
-      })
+      }
+    )
 
-      resolve()
-    })
+    resolve()
   })
 }
 

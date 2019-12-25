@@ -66,7 +66,7 @@ const onRender = (entry, out) => {
       try {
         // sassをレンダリング
         const getsSassRender = await sassRender(
-          `${path.join(process.cwd(), entry, 'index.scss')}`
+          `${path.join(process.cwd(), entry)}`
         )
 
         // sass -> css
@@ -92,23 +92,27 @@ const onRender = (entry, out) => {
   })
 }
 
-// ここから処理を開始
 const onInitRender = () => {
   return new Promise((resolve, reject) => {
-    fs.access(distPath, error => {
-      if (error) {
-        fs.mkdirSync(distPath) // ない場合フォルダーを作成
-      }
-
-      glob(`${src}/**/${cssDir}`, {}, (error, dirs) => {
+    glob(
+      `${src}/**/${cssDir}`,
+      {
+        ignore: `${src}/**/_${cssDir}`
+      },
+      (error, dirs) => {
         if (error) {
           console.error(chalk.red(error.message))
           return
         }
 
         dirs.forEach(entry => {
-          const entryDir = entry.replace(new RegExp('src/'), '') // srcを削除したパス
-          const distFile = `${path.join(distPath, entryDir)}/index.css` // 吐き出すパス
+          const result = entry.split('/')
+          result.pop()
+
+          let parentDirs = result.join('/')
+          parentDirs = parentDirs.replace(new RegExp('src/'), '') // srcを削除したパス
+
+          const distFile = `${path.join(distPath, parentDirs)}/index.css` // 吐き出すパス
 
           onRender(entry, distFile)
             .then(() => {
@@ -125,7 +129,7 @@ const onInitRender = () => {
                     ;(async () => {
                       const compileStartTime = moment()
 
-                      await onRender(entry, distFile) // cssレンダリング
+                      await onRender(path, distFile) // cssレンダリング
 
                       const diff = moment().diff(compileStartTime) // レンダリングの時間を取得
 
@@ -153,8 +157,8 @@ const onInitRender = () => {
               reject()
             })
         })
-      })
-    })
+      }
+    )
   })
 }
 

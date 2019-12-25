@@ -4,9 +4,7 @@ import fs from 'fs'
 const { distPath } = conf()
 
 const checkDist = () => {
-  console.log(distPath)
-
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     fs.access(distPath, error => {
       if (error) {
         fs.mkdirSync(distPath) // ない場合フォルダーを作成
