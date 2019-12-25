@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=local nodemon --exec babel-node system/server.js --location=local",
-    "build": "NODE_ENV=production babel-node system/build.js --location=local && yarn cpx:prod",
+    "start": "NODE_ENV=local nodemon --exec babel-node system/server.js",
+    "build": "NODE_ENV=production babel-node system/build.js && yarn cpx:prod",
     "cpx:prod": "cpx \"src/**/**/*.{js,gif,png,jpg,ico,svg,mp3,mp4,webm,eot,ttf,otf,woff,woff2,xml,json,txt,webmanifest,htaccess}\" production"
   },
   "repository": {
