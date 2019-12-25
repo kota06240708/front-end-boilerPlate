@@ -7,7 +7,7 @@ const checkDist = () => {
   return new Promise(resolve => {
     fs.access(distPath, error => {
       if (error) {
-        fs.mkdirSync(distPath) // ない場合フォルダーを作成
+        fs.mkdirSync(distPath)
         resolve()
       }
 

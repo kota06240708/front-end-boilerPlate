@@ -22,7 +22,10 @@ export default merge(baseConfig, {
     new webpack.HotModuleReplacementPlugin(),
     new FriendlyErrorsPlugin({
       compilationSuccessInfo: {
-        messages: ['You application is running here http://localhost:8080']
+        messages: [
+          'You application is running here http://localhost:8080',
+          'rsでリロードができます。'
+        ]
       },
       onErrors: () => {},
       clearConsole: true
