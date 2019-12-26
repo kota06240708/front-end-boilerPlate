@@ -9,7 +9,8 @@
     "cpx": "cpx \"src/**/**/*.{gif,png,jpg,ico,svg,mp3,mp4,webm,eot,ttf,otf,woff,woff2,xml,json,txt,webmanifest,htaccess}\" production",
     "lint:pug": "pug-lint --reporter node_modules/puglint-stylish .",
     "lint:style": "stylelint --fix --ignore-path .gitignore \"**/*.scss\"",
-    "lint:script": "eslint --fix --ext .js --ignore-path .gitignore ."
+    "lint:script": "eslint --fix --ext .js --ignore-path .gitignore .",
+    "lint-staged": "lint-staged"
   },
   "husky": {
     "hooks": {
@@ -17,6 +18,7 @@
     }
   },
   "lint-staged": {
+    "*.pug": ["yarn lint:pug", "git add --force"],
     "*.js": ["yarn lint:script", "git add --force"],
     "*.scss": ["yarn lint:style", "git add --force"]
   },
