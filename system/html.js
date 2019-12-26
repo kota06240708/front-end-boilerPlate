@@ -5,6 +5,9 @@ import chokidar from 'chokidar'
 import glob from 'glob'
 import moment from 'moment'
 
+import gulp from 'gulp'
+import pugLinter from 'gulp-pug-linter'
+import pugLintStylish from 'puglint-stylish'
 import Pug from 'pug'
 import browserSync from 'browser-sync'
 
@@ -12,6 +15,15 @@ import conf from './config'
 import writeFile from './config/util/writefile'
 
 const { src, distPath, htmlDir, isLocal } = conf()
+
+// puglint
+const onPugLint = () => {
+  return gulp.src(`./${src}/**/${htmlDir}`).pipe(
+    pugLinter({
+      reporter: pugLintStylish
+    })
+  )
+}
 
 /**
  * レンダリング処理
@@ -26,6 +38,8 @@ const onRender = (entry, out) => {
       }
 
       const distFile = `${path.join(distPath, out)}/index.html` // 吐き出すパス
+
+      onPugLint()
 
       Pug.render(
         html,
