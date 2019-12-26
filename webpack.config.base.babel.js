@@ -17,9 +17,9 @@ export default {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.ts$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'ts-loader'
       },
       {
         test: /\.(vert|frag|glsl)$/i,
@@ -28,7 +28,7 @@ export default {
       },
       {
         enforce: 'pre',
-        test: /\.js$/,
+        test: /\.ts$/,
         exclude: /node_modules/,
         loader: 'eslint-loader',
         options: {
@@ -36,6 +36,9 @@ export default {
         }
       }
     ]
+  },
+  resolve: {
+    extensions: ['.ts', '.js']
   }
   // jsを複数を使う時に使う。
   // optimization: {

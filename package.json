@@ -10,7 +10,7 @@
     "cpx": "cpx \"src/**/**/*.{gif,png,jpg,ico,svg,mp3,mp4,webm,eot,ttf,otf,woff,woff2,xml,json,txt,webmanifest,htaccess}\" production",
     "lint:pug": "pug-lint --reporter node_modules/puglint-stylish .",
     "lint:style": "stylelint --fix --ignore-path .gitignore \"**/*.scss\"",
-    "lint:script": "eslint --fix --ext .js --ignore-path .gitignore .",
+    "lint:script": "eslint --fix --ext .ts --ignore-path .eslintignore .",
     "lint-staged": "lint-staged"
   },
   "husky": {
@@ -20,7 +20,7 @@
   },
   "lint-staged": {
     "*.pug": ["yarn lint:pug", "git add --force"],
-    "*.js": ["yarn lint:script", "git add --force"],
+    "*.ts": ["yarn lint:script", "git add --force"],
     "*.scss": ["yarn lint:style", "git add --force"]
   },
   "repository": {
@@ -41,6 +41,8 @@
     "@babel/preset-es2015": "^7.0.0-beta.53",
     "@babel/register": "^7.7.4",
     "@babel/runtime": "^7.7.4",
+    "@typescript-eslint/eslint-plugin": "^2.13.0",
+    "@typescript-eslint/parser": "^2.13.0",
     "autoprefixer": "^9.7.3",
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.3",
@@ -55,6 +57,7 @@
     "eslint-config-prettier": "^6.7.0",
     "eslint-loader": "^3.0.3",
     "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-typescript": "^0.14.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "glob": "^7.1.6",
     "glslify-loader": "^2.0.0",
@@ -84,6 +87,8 @@
     "stylelint-config-primer": "^9.0.0",
     "stylelint-config-standard": "^19.0.0",
     "stylelint-scss": "^3.13.0",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.4",
     "webpack": "^4.41.4",
     "webpack-dev-middleware": "^3.7.2",
     "webpack-hot-middleware": "^2.25.0",
