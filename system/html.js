@@ -49,7 +49,7 @@ const onRender = (entry, out) => {
       Pug.render(
         html,
         {
-          pretty: true,
+          pretty: isLocal,
           cache: false
         },
         (err, data) => {
