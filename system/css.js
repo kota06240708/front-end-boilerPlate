@@ -4,6 +4,7 @@ import chalk from 'chalk'
 import chokidar from 'chokidar'
 import glob from 'glob'
 import moment from 'moment'
+import browserSync from 'browser-sync'
 
 import sass from 'node-sass'
 import postcss from 'postcss'
@@ -149,6 +150,8 @@ const onInitRender = () => {
                       console.log(
                         chalk.green(`✔︎ Compiled Style ${path} (${diff}ms)`)
                       )
+
+                      browserSync.reload()
                     })()
                   })
                   .on('unlink', path => {

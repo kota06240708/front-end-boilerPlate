@@ -67,7 +67,8 @@
     "webpack": "^4.41.4",
     "webpack-dev-middleware": "^3.7.2",
     "webpack-hot-middleware": "^2.25.0",
-    "webpack-merge": "^4.2.2"
+    "webpack-merge": "^4.2.2",
+    "pug-lint": "^2.6.0"
   },
   "dependencies": {
     "moment": "^2.24.0"

@@ -24,7 +24,7 @@ export default merge(baseConfig, {
       compilationSuccessInfo: {
         messages: [
           'You application is running here http://localhost:8080',
-          'rsでリロードができます。'
+          '`rs` でリロードができます。'
         ]
       },
       onErrors: () => {},

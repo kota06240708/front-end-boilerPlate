@@ -6,6 +6,7 @@ import glob from 'glob'
 import moment from 'moment'
 
 import Pug from 'pug'
+import browserSync from 'browser-sync'
 
 import conf from './config'
 import writeFile from './config/util/writefile'
@@ -73,6 +74,7 @@ const onInitRender = () => {
 
                   onRender(path, parentDirs).then(() => {
                     const diff = moment().diff(compileStartTime) // レンダリングの時間を取得
+                    browserSync.reload()
                     console.log(
                       chalk.green(`✔︎ Compiled Pug ${path} (${diff}ms)`)
                     )
