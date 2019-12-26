@@ -37,7 +37,12 @@ const onRender = (entry, out) => {
         return
       }
 
-      const distFile = `${path.join(distPath, out)}/index.html` // 吐き出すパス
+      const regex = /\/$/
+      const isSlash = regex.test(out) // 末尾にスラッシュがあるか確認
+
+      const distFile = isSlash
+        ? `${path.join(distPath, out)}index.html`
+        : `${path.join(distPath, out)}/index.html` // 吐き出すパス
 
       onPugLint()
 
@@ -55,6 +60,7 @@ const onRender = (entry, out) => {
             return
           }
 
+          console.log(chalk.green(`✔︎ build template ${distFile}`))
           writeFile(distFile, data)
           resolve()
         }
@@ -69,6 +75,8 @@ const onInitRender = () => {
       `${src}/**/${htmlDir}`,
       { ignore: `${src}/**/_${htmlDir}` },
       (error, dirs) => {
+        let count = 0 // レンダリングした数をカウント
+
         dirs.forEach(r => {
           const result = r.split('/')
           result.pop()
@@ -78,6 +86,12 @@ const onInitRender = () => {
           parentDirs = parentDirs.replace(new RegExp('template'), '') // templateを削除
 
           onRender(r, parentDirs).then(() => {
+            count++
+
+            if (count >= dirs.length) {
+              resolve()
+            }
+
             if (isLocal) {
               // watch
               const watcher = chokidar.watch(r)
@@ -109,8 +123,6 @@ const onInitRender = () => {
         })
       }
     )
-
-    resolve()
   })
 }
 

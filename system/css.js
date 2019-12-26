@@ -96,6 +96,8 @@ const onRender = (entry, out) => {
 
         await writeFile(out, getpostCssRender)
 
+        console.log(chalk.green(`✔︎ build style ${out}`))
+
         resolve()
       } catch {
         reject()
@@ -114,6 +116,8 @@ const onInitRender = () => {
         ignore: `${src}/**/_${cssDir}`
       },
       (error, dirs) => {
+        let count = 0 // レンダリングした数をカウント
+
         if (error) {
           console.error(chalk.red(error.message))
           return
@@ -130,9 +134,11 @@ const onInitRender = () => {
 
           onRender(entry, distFile)
             .then(() => {
-              console.log(chalk.green(`✔︎ build Style ${distFile}`))
+              count++
 
-              resolve()
+              if (count >= dirs.length) {
+                resolve()
+              }
 
               if (isLocal) {
                 // watch
