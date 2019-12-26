@@ -9,6 +9,8 @@ import nested from 'postcss-nested'
 import flexbugs from 'postcss-flexbugs-fixes'
 import calc from 'postcss-calc'
 import cssnano from 'cssnano'
+import stylelint from 'stylelint'
+import postcssReporter from 'postcss-reporter'
 
 const postCssOpt = (from, to) => {
   const result = {}
@@ -33,6 +35,8 @@ const postCssOpt = (from, to) => {
       preset: 'default'
     })
   ]
+
+  result.stylelint = [stylelint(), postcssReporter({ clearMessages: true })]
 
   return result
 }

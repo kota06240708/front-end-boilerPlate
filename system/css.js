@@ -11,6 +11,7 @@ import postcss from 'postcss'
 import conf from './config'
 import writeFile from './config/util/writefile'
 import postcssConf from '../postcss.config'
+import postScss from 'postcss-scss'
 
 const { src, distPath, cssDir, isLocal } = conf()
 
@@ -33,9 +34,9 @@ const sassRender = file => {
  * @param {Keydata} keydata 必須引数
  * @return {Promise} resolveの場合は変換後のCSSの文字列を返す
  */
-const postCssRender = keydata => {
+const postCssRender = (keydata, isLint = false) => {
   return new Promise((resolve, reject) => {
-    const { plugins, from, to } = keydata.config
+    const { plugins, from, to, stylelint } = keydata.config
 
     fs.readFile(keydata.targetFile, (err, css) => {
       if (err) {
@@ -45,8 +46,10 @@ const postCssRender = keydata => {
         return
       }
 
-      postcss(plugins)
-        .process(css, { from, to })
+      const params = isLint ? { from, syntax: postScss } : { from, to }
+
+      postcss(isLint ? stylelint : plugins)
+        .process(css, params)
         .then(
           result => {
             resolve(result.css)
@@ -64,6 +67,16 @@ const onRender = (entry, out) => {
   return new Promise((resolve, reject) => {
     const onResult = async () => {
       try {
+        let config = postcssConf(entry, entry)
+
+        await postCssRender(
+          {
+            config,
+            targetFile: entry
+          },
+          true
+        )
+
         // sassをレンダリング
         const getsSassRender = await sassRender(
           `${path.join(process.cwd(), entry)}`
@@ -72,7 +85,7 @@ const onRender = (entry, out) => {
         // sass -> css
         await writeFile(out, getsSassRender)
 
-        const config = postcssConf(out, out)
+        config = postcssConf(out, out)
 
         // 吐き出されたcssをpostcssに通す
         const getpostCssRender = await postCssRender({

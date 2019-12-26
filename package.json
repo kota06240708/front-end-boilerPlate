@@ -6,7 +6,8 @@
   "scripts": {
     "start": "NODE_ENV=local nodemon --exec babel-node system/server.js",
     "build": "NODE_ENV=production babel-node system/build.js && yarn cpx",
-    "cpx": "cpx \"src/**/**/*.{gif,png,jpg,ico,svg,mp3,mp4,webm,eot,ttf,otf,woff,woff2,xml,json,txt,webmanifest,htaccess}\" production"
+    "cpx": "cpx \"src/**/**/*.{gif,png,jpg,ico,svg,mp3,mp4,webm,eot,ttf,otf,woff,woff2,xml,json,txt,webmanifest,htaccess}\" production",
+    "lint:style": "stylelint --fix --ignore-path .gitignore \"**/*.scss\""
   },
   "repository": {
     "type": "git",
@@ -55,8 +56,14 @@
     "postcss-flexbugs-fixes": "^4.1.0",
     "postcss-nested": "^4.2.1",
     "postcss-reporter": "^6.0.1",
+    "postcss-scss": "^2.0.0",
     "pug": "^2.0.4",
     "raw-loader": "^4.0.0",
+    "stylelint": "^12.0.1",
+    "stylelint-config-prettier": "^8.0.0",
+    "stylelint-config-primer": "^9.0.0",
+    "stylelint-config-standard": "^19.0.0",
+    "stylelint-scss": "^3.13.0",
     "webpack": "^4.41.4",
     "webpack-dev-middleware": "^3.7.2",
     "webpack-hot-middleware": "^2.25.0",
