@@ -26,6 +26,25 @@ const onPugLint = () => {
 }
 
 /**
+ * jsonデータをまとめる関数
+ * @returns {object} - page配下のjsonデータをまとめたオブジェクトを返す
+ */
+const jsonData = () => {
+  const dirname = `./data/page` // jsonデータが格納されているファイル
+  const files = fs.readdirSync(dirname) // jsonファイルの名前を取得
+  let jsonData = {} // jsonデータを格納する変数
+
+  files.forEach(fileName => {
+    const parse = JSON.parse(
+      fs.readFileSync(`${process.cwd()}/data/page/${fileName}`, 'utf8')
+    ) // 各jsonをパースする
+    Object.assign(jsonData, parse) // パースしたjsonを用意した変数にマージしていく
+  })
+
+  return jsonData // マージしたjsonを返す
+}
+
+/**
  * レンダリング処理
  * @param {string} entry 読み取り先のpath
  * @param {string} out  吐き出し先のpath
@@ -50,7 +69,8 @@ const onRender = (entry, out) => {
         html,
         {
           pretty: isLocal,
-          cache: false
+          cache: false,
+          data: jsonData()
         },
         (err, data) => {
           if (err) {

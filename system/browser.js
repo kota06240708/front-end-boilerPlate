@@ -33,6 +33,11 @@ const onInitBrowser = () => {
     port: 8080,
     open: false,
     reloadOnRestart: true,
+    ghostMode: {
+      clicks: false,
+      forms: false,
+      scroll: false
+    },
     server: {
       baseDir: [src, dist],
       middleware: [
