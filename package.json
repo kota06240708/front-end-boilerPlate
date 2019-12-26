@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=local nodemon --exec babel-node system/server.js",
+    "prebuild": "rimraf ./production",
     "build": "NODE_ENV=production babel-node system/build.js && yarn cpx",
     "cpx": "cpx \"src/**/**/*.{gif,png,jpg,ico,svg,mp3,mp4,webm,eot,ttf,otf,woff,woff2,xml,json,txt,webmanifest,htaccess}\" production",
     "lint:pug": "pug-lint --reporter node_modules/puglint-stylish .",
