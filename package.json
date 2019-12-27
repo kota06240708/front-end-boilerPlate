@@ -19,9 +19,18 @@
     }
   },
   "lint-staged": {
-    "*.pug": ["yarn lint:pug", "git add --force"],
-    "*.ts": ["yarn lint:script", "git add --force"],
-    "*.scss": ["yarn lint:style", "git add --force"]
+    "*.pug": [
+      "yarn lint:pug",
+      "git add --force"
+    ],
+    "*.ts": [
+      "yarn lint:script",
+      "git add --force"
+    ],
+    "*.scss": [
+      "yarn lint:style",
+      "git add --force"
+    ]
   },
   "repository": {
     "type": "git",
@@ -87,6 +96,7 @@
     "stylelint-config-primer": "^9.0.0",
     "stylelint-config-standard": "^19.0.0",
     "stylelint-scss": "^3.13.0",
+    "terser-webpack-plugin": "^2.3.1",
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.4",
     "webpack": "^4.41.4",
