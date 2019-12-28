@@ -1,7 +1,7 @@
 import { Ttest } from './_test'
 
 const obj: Ttest = {
-  one: 'うんこ'
+  one: 'example'
 }
 
 const test: (t: string) => string = (t: string) => {

@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "sourceMap": true,
     "target": "es5",
     "allowJs": true,
@@ -14,7 +15,12 @@
     "lib": [
       "es2019",
       "dom"
-    ]
+    ],
+    "paths": {
+      "*": [
+        "@types/*"
+      ]
+    }
   },
   "include": [
     "./src",
