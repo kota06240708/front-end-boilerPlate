@@ -52,7 +52,7 @@ $ yarn browser
 
 ```sh
 .
-├── @type          # 全体共通の型
+├── @types         # 全体共通の型
 ├── dist           # 開発ファイルの書出先
 ├── production     # 本番環境向
 ├── src            # 実際に手を動かすファイル
