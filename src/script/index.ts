@@ -1,13 +1,19 @@
-import { Ttest } from './_test'
+import { makeArray } from './_make-array'
 
-const obj: Ttest = {
-  one: 'example'
+class Sticky {
+  private $$sections: Array<HTMLElement>
+  private $$contents: Array<HTMLElement>
+
+  constructor () {
+    this.$$sections = makeArray(document.querySelectorAll('.js-section'))
+    this.$$contents = makeArray(document.querySelectorAll('.js-contents'))
+  }
+
+  public init (): void {
+    console.log(this.$$sections)
+    console.log(this.$$contents)
+  }
 }
 
-const test: (t: string) => string = (t: string) => {
-  return t
-}
-
-console.log(test('top'))
-console.log(test(process.env.NODE_ENV))
-console.log(obj.one)
+const sticky = new Sticky()
+sticky.init()
