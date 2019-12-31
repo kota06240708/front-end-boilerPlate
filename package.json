@@ -105,6 +105,7 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
-    "moment": "^2.24.0"
+    "moment": "^2.24.0",
+    "ress": "^2.0.3"
   }
 }

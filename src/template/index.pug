@@ -9,8 +9,9 @@ html(lang='ja')
   body
     p #{data.siteWide.title}
     .top-section-all
-      section.js-section.top-section
-        .js-contents.top-contents
-      section.js-section.top-section
-        .js-contents.top-contents
+      .top-section-all-inner
+        section.js-section.top-section
+          .js-contents.top-contents.one
+        section.js-section.top-section
+          .js-contents.top-contents.two
     script(src='./script/index.bundle.js')

@@ -1,15 +1,39 @@
+@import 'ress/ress.css';
+
 .top-section-all {
   width: 100%;
+  height: 20000px;
+}
+
+.top-section-all-inner {
+  width: 100%;
+  padding: 0 40px;
 }
 
 .top-section {
   width: 100%;
   background-color: #000;
   height: 1000px;
+  position: relative;
+  margin-bottom: 100px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .top-contents {
   width: 100%;
   height: 100px;
-  background-color: #fcc;
+  position: static;
+  top: 0;
+
+  &.one {
+    background: linear-gradient(to bottom, #ffc778, #f888);
+    height: 400px;
+  }
+
+  &.two {
+    background-color: #f88;
+  }
 }
