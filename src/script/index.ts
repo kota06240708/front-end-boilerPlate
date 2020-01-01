@@ -52,11 +52,16 @@ class Sticky {
       const $$parent: HTMLElement = r.el
       const $$child: HTMLElement = r.child
 
+      const isStart: boolean = $$parent.classList.contains('start')
+      const isEnd: boolean = $$parent.classList.contains('end')
+
       if (r.top <= this.scrollTop && r.bottom >= this.scrollTop) {
-        if (!$$parent.classList.contains('current')) {
-          $$parent.classList.add('current')
-          $$child.style.position = 'absolute'
+        if (isStart) {
+          $$parent.classList.remove('start')
+        } else if (isEnd) {
+          $$parent.classList.remove('end')
         }
+
         const top: number = this.scrollTop - r.top
         const bottom: number = $$parent.clientHeight - $$child.clientHeight
         const scrollBottom: number = this.scrollTop + $$child.clientHeight
@@ -67,7 +72,16 @@ class Sticky {
           $$child.style.top = `${top}px`
         }
       } else if (r.top > this.scrollTop) {
-        $$child.style.top = `0px`
+        if (!isStart) {
+          $$parent.classList.add('start')
+          $$child.style.top = '0px'
+        }
+      } else if (r.bottom < this.scrollTop) {
+        if (!isEnd) {
+          $$parent.classList.add('end')
+          const bottom: number = $$parent.clientHeight - $$child.clientHeight
+          $$child.style.top = `${bottom}px`
+        }
       }
     })
   }
