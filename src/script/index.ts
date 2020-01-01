@@ -1,5 +1,6 @@
 import { makeArray } from './_make-array'
 import { offsetTop } from './_offset'
+import throttle from './_throttle'
 
 type TScroll = {
   top: number
@@ -87,7 +88,13 @@ class Sticky {
   }
 
   onResize (): void {
-    this.resetVal()
+    const onProcess: () => void = () => {
+      this.resetVal()
+      this.onSicky()
+      console.log('うんこ')
+    }
+
+    throttle(onProcess, 1000)
   }
 
   private resetVal (): void {
