@@ -13,6 +13,7 @@ class Sticky {
   private $$sections: Array<HTMLElement>
   private sectionsOpt: Array<TScroll>
   private scrollTop: number
+  private while: number
 
   constructor () {
     this.$$sections = makeArray(document.querySelectorAll('.js-section'))
@@ -22,6 +23,8 @@ class Sticky {
 
     this.onScroll = this.onScroll.bind(this)
     this.onResize = this.onResize.bind(this)
+
+    this.while = 0
   }
 
   public init (): void {
@@ -43,11 +46,13 @@ class Sticky {
     window.addEventListener('scroll', this.onScroll)
   }
 
+  // スクロールイベント
   onScroll (): void {
     this.scrollTop = window.pageYOffset || document.documentElement.scrollTop
     this.onSicky()
   }
 
+  // 追従の処理
   onSicky (): void {
     this.sectionsOpt.forEach((r: TScroll) => {
       const $$parent: HTMLElement = r.el
@@ -56,7 +61,7 @@ class Sticky {
       const isStart: boolean = $$parent.classList.contains('start')
       const isEnd: boolean = $$parent.classList.contains('end')
 
-      if (r.top <= this.scrollTop && r.bottom >= this.scrollTop) {
+      if (r.top <= this.scrollTop + this.while && r.bottom >= this.scrollTop) {
         if (isStart) {
           $$parent.classList.remove('start')
         } else if (isEnd) {
@@ -67,10 +72,10 @@ class Sticky {
         const bottom: number = $$parent.clientHeight - $$child.clientHeight
         const scrollBottom: number = this.scrollTop + $$child.clientHeight
 
-        if (r.bottom <= scrollBottom) {
+        if (r.bottom - this.while <= scrollBottom) {
           $$child.style.top = `${bottom}px`
         } else {
-          $$child.style.top = `${top}px`
+          $$child.style.top = `${top + this.while}px`
         }
       } else if (r.top > this.scrollTop) {
         if (!isStart) {
@@ -91,7 +96,6 @@ class Sticky {
     const onProcess: () => void = () => {
       this.resetVal()
       this.onSicky()
-      console.log('うんこ')
     }
 
     throttle(onProcess, 1000)
@@ -105,5 +109,5 @@ class Sticky {
   }
 }
 
-const sticky = new Sticky()
+const sticky: Sticky = new Sticky()
 sticky.init()
