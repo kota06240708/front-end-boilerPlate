@@ -14,7 +14,7 @@ import browserSync from 'browser-sync'
 import conf from './config'
 import writeFile from './config/util/writefile'
 
-const { src, distPath, htmlDir, isLocal } = conf()
+const { src, srcPath, distPath, htmlDir, isLocal } = conf()
 
 // puglint
 const onPugLint = () => {
@@ -68,6 +68,7 @@ const onRender = (entry, out) => {
       Pug.render(
         html,
         {
+          basedir: srcPath,
           pretty: isLocal,
           cache: false,
           data: jsonData()

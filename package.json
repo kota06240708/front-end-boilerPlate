@@ -7,6 +7,7 @@
     "start": "NODE_ENV=local nodemon --exec babel-node system/server.js",
     "prebuild": "rimraf ./production",
     "build": "NODE_ENV=production babel-node system/build.js && yarn cpx",
+    "browser": "browser-sync start -s 'production'",
     "cpx": "cpx \"src/**/**/*.{gif,png,jpg,ico,svg,mp3,mp4,webm,eot,ttf,otf,woff,woff2,xml,json,txt,webmanifest,htaccess}\" production",
     "lint:pug": "pug-lint --reporter node_modules/puglint-stylish .",
     "lint:style": "stylelint --fix --ignore-path .gitignore \"**/*.scss\"",
@@ -19,18 +20,9 @@
     }
   },
   "lint-staged": {
-    "*.pug": [
-      "yarn lint:pug",
-      "git add --force"
-    ],
-    "*.ts": [
-      "yarn lint:script",
-      "git add --force"
-    ],
-    "*.scss": [
-      "yarn lint:style",
-      "git add --force"
-    ]
+    "*.pug": ["yarn lint:pug", "git add --force"],
+    "*.ts": ["yarn lint:script", "git add --force"],
+    "*.scss": ["yarn lint:style", "git add --force"]
   },
   "repository": {
     "type": "git",
@@ -105,6 +97,7 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
+    "awesome-sass-easing": "^1.1.2",
     "moment": "^2.24.0",
     "ress": "^2.0.3"
   }

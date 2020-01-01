@@ -9,6 +9,7 @@
   "rules": {
     "indentation": 2,
     "string-quotes": "single",
+    "at-rule-no-unknown": null,
     "no-missing-end-of-source-newline": null,
     "selector-max-type": null,
   }
