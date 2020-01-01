@@ -12,14 +12,14 @@ const throttle: (func: () => void, duration: number) => void = (
 ) => {
   duration = duration / 60
 
-  const result: () => void = () => {
+  const onResult: () => void = () => {
     if (time + duration - Date.now() < 0) {
       time = new Date().getTime()
       func()
     }
   }
 
-  return result()
+  return onResult()
 }
 
 export default throttle
