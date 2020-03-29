@@ -1,7 +1,7 @@
-(() => {
-  window.addEventListener('DOMContentLoaded', () => {
-    let test: string;
+((): void => {
+  window.addEventListener('DOMContentLoaded', (): void => {
+    let test: string
 
-    console.log(test);
-  });
-})();
+    console.log(test)
+  })
+})()
