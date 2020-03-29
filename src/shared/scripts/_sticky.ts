@@ -1,38 +1,38 @@
 type TScroll = {
-  top: number
-  bottom: number
-  el: HTMLElement
-  child: HTMLElement
-}
+  top: number;
+  bottom: number;
+  el: HTMLElement;
+  child: HTMLElement;
+};
 
 type TOpt = {
-  parent: string
-  child: string
-  interval?: number
-}
+  parent: string;
+  child: string;
+  interval?: number;
+};
 
 class Sticky {
-  private $$sections: Array<HTMLElement>
-  private sectionsOpt: Array<TScroll>
-  private child: string
-  private scrollTop: number
-  private while: number
-  private time: number
+  private $$sections: Array<HTMLElement>;
+  private sectionsOpt: Array<TScroll>;
+  private child: string;
+  private scrollTop: number;
+  private while: number;
+  private time: number;
 
   constructor (opt: TOpt) {
-    const { parent, child, interval }: TOpt = opt
+    const { parent, child, interval }: TOpt = opt;
 
-    this.$$sections = this.makeArray(document.querySelectorAll(parent))
+    this.$$sections = this.makeArray(document.querySelectorAll(parent));
 
-    this.child = child
-    this.sectionsOpt = []
-    this.scrollTop = window.pageYOffset || document.documentElement.scrollTop
+    this.child = child;
+    this.sectionsOpt = [];
+    this.scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-    this.onScroll = this.onScroll.bind(this)
-    this.onResize = this.onResize.bind(this)
+    this.onScroll = this.onScroll.bind(this);
+    this.onResize = this.onResize.bind(this);
 
-    this.while = interval || 0
-    this.time = Date.now()
+    this.while = interval || 0;
+    this.time = Date.now();
   }
 
   public init (): void {
@@ -42,89 +42,89 @@ class Sticky {
         bottom: this.offsetTop(r) + r.clientHeight,
         el: r,
         child: r.querySelector(this.child)
-      }
+      };
 
-      this.sectionsOpt[i] = result
-    })
-    this.onListener()
+      this.sectionsOpt[i] = result;
+    });
+    this.onListener();
   }
 
   private onListener (): void {
-    window.addEventListener('resize', this.onResize)
-    window.addEventListener('scroll', this.onScroll)
+    window.addEventListener('resize', this.onResize);
+    window.addEventListener('scroll', this.onScroll);
   }
 
   // スクロールイベント
   private onScroll (): void {
-    this.scrollTop = window.pageYOffset || document.documentElement.scrollTop
-    this.onSicky()
+    this.scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    this.onSicky();
   }
 
   // 追従の処理
   private onSicky (): void {
     this.sectionsOpt.forEach((r: TScroll) => {
-      const $$parent: HTMLElement = r.el
-      const $$child: HTMLElement = r.child
+      const $$parent: HTMLElement = r.el;
+      const $$child: HTMLElement = r.child;
 
-      const isStart: boolean = $$parent.classList.contains('start')
-      const isEnd: boolean = $$parent.classList.contains('end')
+      const isStart: boolean = $$parent.classList.contains('start');
+      const isEnd: boolean = $$parent.classList.contains('end');
 
       if (r.top <= this.scrollTop + this.while && r.bottom >= this.scrollTop) {
         if (isStart) {
-          $$parent.classList.remove('start')
+          $$parent.classList.remove('start');
         } else if (isEnd) {
-          $$parent.classList.remove('end')
+          $$parent.classList.remove('end');
         }
 
-        $$child.style.width = `${$$parent.clientWidth}px`
+        $$child.style.width = `${$$parent.clientWidth}px`;
 
-        const bottom: number = $$parent.clientHeight - $$child.clientHeight
-        const scrollBottom: number = this.scrollTop + $$child.clientHeight
+        const bottom: number = $$parent.clientHeight - $$child.clientHeight;
+        const scrollBottom: number = this.scrollTop + $$child.clientHeight;
 
         if (r.bottom - this.while <= scrollBottom) {
           // 要素が親の高さを超えた場合
-          $$child.style.position = 'absolute'
-          $$child.style.top = `${bottom}px`
+          $$child.style.position = 'absolute';
+          $$child.style.top = `${bottom}px`;
         } else {
-          $$child.style.position = 'fixed'
-          $$child.style.top = `${this.while}px`
+          $$child.style.position = 'fixed';
+          $$child.style.top = `${this.while}px`;
         }
       } else if (r.top > this.scrollTop) {
         if (!isStart) {
-          $$parent.classList.add('start')
-          $$child.style.position = 'absolute'
-          $$child.style.width = '100%'
-          $$child.style.top = '0px'
+          $$parent.classList.add('start');
+          $$child.style.position = 'absolute';
+          $$child.style.width = '100%';
+          $$child.style.top = '0px';
         }
       } else if (r.bottom < this.scrollTop) {
         if (!isEnd) {
-          const bottom: number = $$parent.clientHeight - $$child.clientHeight
+          const bottom: number = $$parent.clientHeight - $$child.clientHeight;
 
-          $$parent.classList.add('end')
-          $$child.style.position = 'absolute'
-          $$child.style.width = '100%'
-          $$child.style.top = `${bottom}px`
+          $$parent.classList.add('end');
+          $$child.style.position = 'absolute';
+          $$child.style.width = '100%';
+          $$child.style.top = `${bottom}px`;
         }
       }
-    })
+    });
   }
 
   // リサイズの処理
   private onResize (): void {
     const onProcess: () => void = () => {
-      this.resetVal()
-      this.onSicky()
-    }
+      this.resetVal();
+      this.onSicky();
+    };
 
-    this.throttle(onProcess, 1000)
+    this.throttle(onProcess, 1000);
   }
 
   // 要素の値をリセット
   private resetVal (): void {
     this.$$sections.forEach((r: HTMLElement, i: number) => {
-      this.sectionsOpt[i].top = this.offsetTop(r)
-      this.sectionsOpt[i].bottom = this.offsetTop(r) + r.clientHeight
-    })
+      this.sectionsOpt[i].top = this.offsetTop(r);
+      this.sectionsOpt[i].bottom = this.offsetTop(r) + r.clientHeight;
+    });
   }
 
   /**
@@ -133,13 +133,13 @@ class Sticky {
    * @returns {number} 高さの値
    */
   private offsetTop: (el: HTMLElement) => number = (el: HTMLElement) => {
-    const rect: DOMRect = el.getBoundingClientRect()
+    const rect: DOMRect = el.getBoundingClientRect() as DOMRect;
     const scrollTop: number =
-      window.pageYOffset || document.documentElement.scrollTop
-    const myTop: number = rect.top + scrollTop
+      window.pageYOffset || document.documentElement.scrollTop;
+    const myTop: number = rect.top + scrollTop;
 
-    return myTop
-  }
+    return myTop;
+  };
 
   /**
    * 間引き
@@ -150,17 +150,17 @@ class Sticky {
     func: () => void,
     duration = 1000
   ) => {
-    duration = duration / 60
+    duration = duration / 60;
 
     const onResult: () => void = () => {
       if (this.time + duration - Date.now() < 0) {
-        this.time = new Date().getTime()
-        func()
+        this.time = new Date().getTime();
+        func();
       }
-    }
+    };
 
-    return onResult()
-  }
+    return onResult();
+  };
 
   /**
    * @param {NodeListOf<HTMLElement>} obj NodeListの配列
@@ -169,12 +169,12 @@ class Sticky {
   private makeArray: (obj: NodeListOf<HTMLElement>) => Array<HTMLElement> = (
     obj: NodeListOf<HTMLElement>
   ) => {
-    const array: Array<HTMLElement> = []
+    const array: Array<HTMLElement> = [];
     for (let i = 0, num = obj.length; i < num; i++) {
-      array[i] = obj[i]
+      array[i] = obj[i];
     }
-    return array
-  }
+    return array;
+  };
 }
 
-export default Sticky
+export default Sticky;
