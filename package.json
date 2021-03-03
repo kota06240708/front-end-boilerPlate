@@ -79,7 +79,7 @@
     "postcss-nested": "^4.2.1",
     "postcss-reporter": "^6.0.1",
     "postcss-scss": "^2.0.0",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "pug-lint": "^2.6.0",
     "puglint-stylish": "^1.1.0",
     "raw-loader": "^4.0.0",
